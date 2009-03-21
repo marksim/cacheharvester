@@ -1,0 +1,37 @@
+CacheHarvester
+==============
+
+CacheHarvester is a plugin that allows you to write information to MemCache and harvest it asynchronously later.
+
+This is very useful for write-heavy sites that record data.   CacheHarvester can be distributed across multiple
+instances of a rails application and multiple memcache servers, either as a pool or as separate entities.   There 
+should be one daemon per harvestable model running for each separate pool of memcache servers.
+
+This cache uses the Rails default cache store.   Modify your config/environments/* file and add 
+	config.cache_store = :mem_cache_store
+
+Dependencies: 
+	daemons
+	yaml
+	timeout
+	Rails 2.2 or higher
+
+
+Example
+=======
+
+To generate a new harvestable model
+
+	script/generate harvestable_model <ModelName> [column:type [column:type [...]]]
+	
+Then in your controller, use
+
+	<ModelName>.new(options).store
+	
+to write it to the cache.   It will be harvested when the daemon is run.
+
+To manage the daemon, use.   (Add this to your capistrano recipes after :restart hook)
+
+	./script/daemons [start|stop|restart]
+
+Copyright (c) 2009 Mark Simoneau, released under the MIT license

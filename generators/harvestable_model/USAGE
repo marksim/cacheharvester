@@ -1,0 +1,18 @@
+Description:
+    Generates a new harvestable model with specified columns and a corresponding harvester daemon that can be
+	started and stopped with ./scripts/daemons start; ./script/daemons stop
+	
+	To write your model to the cache, use <Model>.store(obj) or <Model>.new(options).store.   The daemon running
+	will harvest the models and write them to the database asynchronously.
+
+Example:
+    ./script/generate harvestable_model ModelName [column:type ...]
+
+    This will create:
+        script/daemons
+		config/daemons.yml
+		lib/model_name.rb
+		lib/model_name_ctl
+		app/model/model_name.rb
+		db/migration/XXX_create_model_names.rb
+		
