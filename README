@@ -14,24 +14,19 @@ Dependencies:
 	daemons
 	yaml
 	timeout
-	Rails 2.2 or higher
-
 
 Example
 =======
 
 To generate a new harvestable model
-
 	script/generate harvestable_model <ModelName> [column:type [column:type [...]]]
 	
 Then in your controller, use
-
 	<ModelName>.new(options).store
 	
 to write it to the cache.   It will be harvested when the daemon is run.
 
 To manage the daemon, use.   (Add this to your capistrano recipes after :restart hook)
-
 	./script/daemons [start|stop|restart]
 
 Copyright (c) 2009 Mark Simoneau, released under the MIT license
